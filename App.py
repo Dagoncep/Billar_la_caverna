@@ -18,7 +18,6 @@ app.secret_key = 'mysecretkey'
 def index():
     return render_template('index.html')
 
-
 #-----------Login-----------
 @app.route('/signup')
 def sign():
