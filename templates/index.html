@@ -1,0 +1,249 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384 oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap"rel="stylesheet"/>
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style2.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style3.css') }}">
+<!--<link rel="stylesheet" href="../css/style2.css">
+<link rel="stylesheet" href="../css/style3.css">-->
+<!-- navbar -->
+
+<nav id="navbar" class="nav">
+  <ul class="nav-list">
+    <li>
+        <a href="/signup">Ingresar</a>
+    </li>
+    <li>
+      <a href="#welcome-section">Acerca de</a>
+    </li>
+    <li>
+      <a href="#projects">Billar</a>
+    </li> 
+    <li>
+      <a href="#contact">Contactanos</a>
+    </li>
+  </ul>
+</nav>
+
+<section id="welcome-section" class="welcome-section">
+  <h1>Billares "La Taberna"</h1>
+  <p>Billar La Taberna, un lugar para pasar el tiempo con amigos, atrevete y ven a jugar.</p>
+  <p>Ubicados en ---</p>
+</section>
+
+<section id="projects" class="projects-section">
+  <h2 class="projects-section-header">¿Con qué cuenta el billar?</h2>
+  <div class="carousel carousel--with-overflow" data-infinite="true" data-autoselect="false" data-manual-select="true" data-manual-multiple-select="false">
+    <div class="carousel__slide-wrapper">
+        <div class="carousel__slide a active">
+            <div class="carousel__slide-inner"><img src="{{ url_for('static',filename='images/Billar1.jpeg') }}" alt="" width="700px" height="500px"></div>
+        </div>
+        <div class="carousel__slide b">
+            <div class="carousel__slide-inner"><img src="{{ url_for('static',filename='images/Billar2.jpeg') }}" alt="" width="700px" height="500px"></div>
+        </div>
+        <div class="carousel__slide c">
+            <div class="carousel__slide-inner"><img src="{{ url_for('static',filename='images/Billar6.jpeg') }}" alt="" width="700px" height="500px"></div>
+        </div>
+        <div class="carousel__slide d">
+            <div class="carousel__slide-inner"><img src="{{ url_for('static',filename='images/Billar4.jpeg') }}" alt="" width="700px" height="500px"></div>
+        </div>
+        <div class="carousel__slide e">
+            <div class="carousel__slide-inner"><img src="{{ url_for('static',filename='images/Billar5.jpeg') }}" alt="" width="700px" height="500px"></div>
+        </div>
+        <div class="carousel__slide f">
+            <div class="carousel__slide-inner"><img src="{{ url_for('static',filename='images/Billar6.jpeg') }}" alt="" width="700px" height="500px"></div>
+        </div>
+    </div>
+    <div class="carousel__navigation--left">
+        <span><</span>
+    </div>
+    <div class="carousel__navigation--right">
+        <span>></span>
+    </div>
+</div>
+ 
+</section>
+   <section id="contact" class="contact-section">
+  <div class="contact-section-header">
+    <h2>Contactanos</h2>
+    <p>Puedes encontrarnos mediante las siguientes redes sociales</p>
+  </div>
+  <div class="contact-links">
+<a href="https://facebook.com/" target="_blank" class="btn contact-details"><i class="fab fa-facebook-square"></i> Facebook</a
+    >
+    <a
+      href="https://twitter.com/vitiellolucas"
+      target="_blank"
+      class="btn contact-details"
+      ><i class="fab fa-twitter"></i> Twitter</a>
+    
+     <a
+      href="https://www.instagram.com/vitiellolucas/"
+      target="_blank"
+      class="btn contact-details"
+      ><i class="fab fa-instagram"></i> Instagram</a>
+
+  </div>
+</section>
+    <footer>
+     
+  <p>
+    &copy; Creado por
+    <a href="" target="_blank">Julian Contreras, Jose Renteria, David Gonzalez, Jessica Niño
+    </a>
+  </p>
+</footer>
+<script>
+
+var carousel, carouselSlideWrapper, allSlides, activeElementIndex, firstElement, lastElement, rightButton, leftButton, slideActive, translateX, autoselectValue, manualSelectValue, manualMultipleSelectValue;
+
+carousel = document.querySelector('.carousel');
+carouselSlideWrapper = carousel.querySelector('.carousel__slide-wrapper');
+rightButton = carousel.querySelector('.carousel__navigation--right');
+leftButton = carousel.querySelector('.carousel__navigation--left');
+slideActive = carousel.querySelector('.carousel__slide.active');
+translateX = 0;
+allSlides = carousel.querySelectorAll('.carousel__slide');
+autoselectValue = carousel.dataset.autoselect;
+manualSelectValue = carousel.dataset.manualSelect;
+manualMultipleSelectValue = carousel.dataset.manualMultipleSelect;
+
+function mobileDevices(){
+    if (window.innerWidth <= 768){
+        translateX = -100;
+    }
+}
+mobileDevices();
+
+
+
+//hacer coincidir active con selected
+
+function autoselect(){
+    if (autoselectValue == "true"){
+        allSlides.forEach(function(element, index) {
+            if (element.classList.contains('active')) {
+                element.classList.add('selected');
+            }
+        })
+    }
+};
+
+autoselect();
+
+
+
+function recalcScena() {
+    allSlides = carousel.querySelectorAll('.carousel__slide');
+    allSlides.forEach(function(element, index) {
+        if (element.classList.contains('active')) {
+            activeElementIndex = index;
+        }
+        firstElement = allSlides[0];
+        beforeLastElement = allSlides[allSlides.length - 2];
+        lastElement = allSlides[allSlides.length - 1];
+    });
+}
+
+recalcScena();
+relocateSlides();
+function relocateSlides() {
+    /* mirar si la última pasa a la primera, la primera a la última, o nada...
+    dependiendo de si la activa es la segunda o la penúltima */
+    if (activeElementIndex === 1) {
+        carouselSlideWrapper.insertBefore(lastElement, allSlides[0]);
+    } else if (activeElementIndex === 0) {
+        carouselSlideWrapper.insertBefore(lastElement, allSlides[0]);
+        if (window.innerWidth >= 768) {
+            carouselSlideWrapper.insertBefore(beforeLastElement, allSlides[0]);
+            translateX = -100;
+            moveSlides();
+        }
+    } else if (activeElementIndex >= (allSlides.length - 2)) {
+        carouselSlideWrapper.appendChild(firstElement);
+    }
+}
+
+//mover las diapositivas
+function moveSlides(){
+    for(var i = 0; i < allSlides.length; i++){
+        allSlides[i].style.transform = "translateX(" + translateX + "%)";
+    }
+}
+
+rightButton.addEventListener('click', function () {
+    /* avanzar el carrusel */
+    if (!!carousel.dataset.infinite) {
+        slideActive.classList.remove('active');
+        slideActive.nextElementSibling.classList.add('active');
+        slideActive = slideActive.nextElementSibling;
+        recalcScena();
+        relocateSlides();
+    }
+
+    if (autoselectValue == "true"){
+        allSlides.forEach.call(allSlides, function(elem) {
+            if(elem !== this) {
+                elem.classList.remove('selected');
+            }
+        })
+        autoselect();
+    }
+
+    if (activeElementIndex < (allSlides.length - 2)) {
+        translateX -= 100;
+    }
+    
+
+    moveSlides();
+});
+
+leftButton.addEventListener('click', function () {
+    /* retroceder el carrusel */
+    if (!!carousel.dataset.infinite) {
+        slideActive.classList.remove('active');
+        slideActive.previousElementSibling.classList.add('active');
+        slideActive = slideActive.previousElementSibling;
+        recalcScena();
+        relocateSlides();
+    }
+
+
+    if (autoselectValue == "true"){
+        allSlides.forEach.call(allSlides, function(elem) {
+            if(elem !== this) {
+                elem.classList.remove('selected');
+            }
+        })
+        autoselect();
+    }
+
+
+    if (activeElementIndex > 1) {
+        translateX += 100;
+    }
+    
+
+    moveSlides();
+});
+
+
+
+
+allSlides.forEach(function (elem) {
+    elem.addEventListener('click', function (e) {
+        if (manualMultipleSelectValue == 'true') {
+            e.currentTarget.classList.toggle('selected');
+        } else if (manualSelectValue == 'true') {
+            var selectedSlide = carousel.querySelector('.selected');
+            if (!!selectedSlide && selectedSlide !== e.currentTarget) {
+                selectedSlide.classList.remove('selected');
+                e.currentTarget.classList.add('selected');
+            } else {
+                e.currentTarget.classList.toggle('selected');
+                
+            }
+        }
+    });
+});
+
+</script>

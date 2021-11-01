@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<table class="table">
+    <thead>
+        <tr class="text-center">
+            <td>NIT</td>
+            <td>Nombre</td>
+            <td>Direccion</td>
+            <td>Telefono</td>
+            <td>Ciudad</td>
+            <td>Operaciones</td>
+        </tr>
+        <tbody>
+            {% for contactos in contactos %}
+            <tr class="text-center">
+                <td>{{ contactos.2 }}</td>
+                <td>{{ contactos.3 }}</td>
+                <td>{{ contactos.4 }}</td>
+                <td>{{ contactos.6 }}</td>
+                <td>{{ contactos.0 }}</td>
+                <td class="text-center">
+                    <a class="btn btn-info" href="/Prov/edit/{{contactos.1}}">Editar</a>
+                    <a class="btn btn-danger" href="/Prov/delete/{{contactos.1}}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </thead>
+</table>
+
+<form action="/Prov/add" method="POST">
+    <div class="input-group mb-3 pt-3">
+        <input class="form-control col-6" type="text" name="name" placeholder="Nombre">
+        <input class="form-control col-6" type="text" name="nit" placeholder="NIT">
+    </div>    
+    <div class="input-group mb-3 pt-3">
+        <input class="form-control col-4" type="text" name="direction" placeholder="Direccion">
+        <input class="form-control col-4" type="text" name="tel" placeholder="Telefono">
+            <span class="form-control col-1"><label>Ciudad : </label></span>
+            <select class="col-2" name="city">
+                <option value="0" >Seleccione..</option>
+                {% for contact in contact %}
+                <option value="{{ contact.0 }}">
+                    {{ contact.1 }}
+                </option>
+                {% endfor %}
+            </select>
+        <button class="btn btn-dark col-2" type="submit">Agregar</button>
+    </div>
+</form>
+{% endblock %}

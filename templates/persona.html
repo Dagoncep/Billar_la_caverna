@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div>
+    <table class="table">
+        <thead>
+            <tr class="text-center">
+                <td>Nombre</td>
+                <td>Identificacion</td>
+                <td>Telefono</td>
+                <td>Rol</td>
+                <td>Direccion</td>
+                <td>Operaciones</td>
+            </tr>
+            <tbody>
+                {% for person in person %}
+                <tr class="text-center">
+                    <td>{{ person.1 }}</td>
+                    <td>{{ person.2 }}</td>
+                    <td>{{ person.3 }}</td>
+                    <td>{{ person.4 }}</td>
+                    <td>{{ person.5 }}</td>
+                    <td class="text-center">
+                        <a class="btn btn-info" href="/Persona/edit/{{person.0}}">Editar</a>
+                        <a class="btn btn-danger" href="/Persona/delete/{{person.0}}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </thead>
+    </table>
+
+    <form action="/Persona/add" method="POST">
+        <div class="input-group mb-3 pt-3">
+            <input class="form-control col-6" type="text" name="nombre" placeholder="Nombre">
+            <input class="form-control col-6" type="text" name="identificacion" placeholder="Identificacion">
+            <input class="form-control col-6" type="text" name="telefono" placeholder="Telefono">
+        </div>    
+        <div class="input-group mb-3 pt-3">
+            <input class="form-control col-4" type="text" name="direccion" placeholder="Direccion">
+            <input class="form-control col-4" type="text" name="contraseña" placeholder="Contraseña">
+                <span class="form-control col-1"><label>ROL : </label></span>
+                <select class="col-2" name="rol">
+                    <option value="0" >Seleccione..</option>
+                    <option value="A">
+                        ADMINISTRADOR
+                    </option>
+                    <option value="E">
+                        EMPLEADO
+                    </option>
+                </select>
+            <button type="submit">Agregar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

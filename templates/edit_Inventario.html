@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    {% for contactos in contactos %}
+    <form action="/Inventario/update/{{contactos.0}}/{{contactos.4}}" method="POST">
+        <div class="input-group mb-3 pt-3">
+            <input class="form-control col-6" type="text" name="name" placeholder="Producto" value="{{contactos.5}}">
+            <input class="form-control col-6" type="text" name="cost" placeholder="Precio" value="{{contactos.6}}">
+        </div>    
+        <div class="input-group mb-3 pt-3">
+            <input class="form-control col-4" type="text" name="amount" placeholder="Cantidad" value="{{contactos.2}}">
+    {% endfor %}
+                <span class="form-control col-1"><label>Proveedor : </label></span>
+                <select class="col-2" name="prov">
+                    <option value="0" >Seleccione..</option>
+                    {% for list in list %}
+                    <option value="{{ list.0 }}">
+                        {{ list.2 }}
+                    </option>
+                    {% endfor %}
+                </select>
+            <button class="btn btn-dark col-2" type="submit">Agregar</button>
+        </div>
+    </form>
+
+
+{% endblock %}

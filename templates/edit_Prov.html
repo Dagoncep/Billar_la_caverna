@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<form action="/Prov/update/{{contact.1}}" method="POST">
+    <div class="input-group mb-3 pt-3">
+        <input class="form-control col-6" type="text" name="name" placeholder="Nombre" value="{{contact.3}}">
+        <input class="form-control col-6" type="text" name="nit" placeholder="NIT" value="{{contact.2}}">
+    </div>    
+    <div class="input-group mb-3 pt-3">
+        <input class="form-control col-4" type="text" name="direction" placeholder="Direccion" value="{{contact.4}}">
+        <input class="form-control col-4" type="text" name="tel" placeholder="Telefono" value="{{contact.6}}">
+            <span class="form-control col-1"><label>Ciudad : </label></span>
+            <select class="col-2" name="city">
+                <option value="0" >Seleccione..</option>
+                {% for contactos in contactos %}
+                <option value="{{ contactos.0 }}">
+                    {{ contactos.1 }}
+                </option>
+                {% endfor %}
+            </select>
+        <button class="btn btn-dark col-2" type="submit">Agregar</button>
+    </div>
+</form>
+
+{% endblock %}

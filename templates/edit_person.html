@@ -1,0 +1,23 @@
+{% for person in person %}
+<form action="/Persona/update/{{person.0}}" method="POST">
+    <div class="input-group mb-3 pt-3">
+        <input class="form-control col-6" type="text" name="nombre" placeholder="Nombre" value="{{ person.1 }}">
+        <input class="form-control col-6" type="text" name="identificacion" placeholder="Identificacion" value="{{person.2}}">
+        <input class="form-control col-6" type="text" name="telefono" placeholder="Telefono" value="{{person.3}}">
+    </div>    
+    <div class="input-group mb-3 pt-3">
+        <input class="form-control col-4" type="text" name="direccion" placeholder="Direccion" value="{{person.5}}">
+        <input class="form-control col-4" type="text" name="contraseña" placeholder="Contraseña" value="{{person.6}}">
+            <span class="form-control col-1"><label>Ciudad : </label></span>
+            <select class="col-2" name="rol">
+                <option value="A">
+                    ADMINISTRADOR
+                </option>
+                <option value="E">
+                    EMPLEADO
+                </option>
+            </select>
+        <button class="btn btn-dark col-2" type="submit">Agregar</button>
+    </div>
+</form>
+{% endfor %}

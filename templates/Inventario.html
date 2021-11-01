@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<table class="table text-center">
+    <thead>
+        <tr class="text-center">
+            <td>Producto</td>
+            <td>Precio</td>
+            <td>Cantidad</td>
+            <td>Proveedor</td>
+            <td>Operaciones</td>
+        </tr>
+        <tbody>
+            {% for inventory in inventory %}
+            <tr>
+                <td>{{ inventory.5 }}</td>
+                <td>{{ inventory.6 }}</td>
+                <td>{{ inventory.2 }}</td>
+                <td>{{ inventory.8 }}</td>
+            
+                <td class="text-center">
+                    <a class="btn btn-info" href="/Inventario/edit/{{inventory.0}}/{{inventory.4}}">Editar</a>
+                    <a class="btn btn-danger" href="/Inventario/delete/{{inventory.0}}/{{inventory.4}}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </thead>
+</table>
+
+<form action="/Inventario/add" method="POST">
+    <div class="input-group mb-3 pt-3">
+        <input class="form-control col-6" type="text" name="name" placeholder="Producto">
+        <input class="form-control col-6" type="text" name="cost" placeholder="Precio">
+    </div>    
+    <div class="input-group mb-3 pt-3">
+        <input class="form-control col-4" type="text" name="amount" placeholder="Cantidad">
+            <span class="form-control col-1"><label>Proveedor : </label></span>
+            <select class="col-2" name="prov">
+                <option value="0" >Seleccione..</option>
+                {% for Prove in Prove %}
+                <option value="{{ Prove.0 }}">
+                    {{ Prove.2 }}
+                </option>
+                {% endfor %}
+            </select>
+        <button class="btn btn-dark col-2" type="submit">Agregar</button>
+    </div>
+</form>
+{% endblock %}

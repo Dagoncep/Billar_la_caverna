@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billares la taberna</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container" >
+        <div class="row pt-4">
+            <div class="col">
+                <div class="card" >
+                    <div class="card-body text-center">
+                        <img src="{{ url_for('static',filename='images/logo.png') }}" alt="" whidth="100px" height="100px" class="img">
+                        <H1 class="text-center">Billares La Caverna</H1> 
+                    </div>
+                    <div class="text-center">   
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="btn-group col- 5 text-center">
+                <a type="button" href="/Inventario" class="btn btn-primary">Inventario</a>
+                <a type="button" href="/Persona" class="btn btn-primary">Persona</a>
+                <a type="button" href="/Prov" class="btn btn-primary">Proveedor</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        {% block body %}
+        
+        {% endblock %}
+    </div>
+
+   <!--Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
